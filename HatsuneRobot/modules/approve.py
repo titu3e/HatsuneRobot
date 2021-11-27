@@ -1,11 +1,11 @@
 import html
 from HatsuneRobot.modules.disable import DisableAbleCommandHandler
 from HatsuneRobot import dispatcher, DRAGONS
-from HatsuneRobot9.modules.helper_funcs.extraction import extract_user
+from HatsuneRobot.modules.helper_funcs.extraction import extract_user
 from telegram.ext import CallbackContext, run_async, CallbackQueryHandler
-import HatsuneRobot9.modules.sql.approve_sql as sql
-from HatsuneRobot9.modules.helper_funcs.chat_status import user_admin
-from HatsuneRobot9.modules.log_channel import loggable
+import HatsuneRobot.modules.sql.approve_sql as sql
+from HatsuneRobot.modules.helper_funcs.chat_status import user_admin
+from HatsuneRobot.modules.log_channel import loggable
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.utils.helpers import mention_html
 from telegram.error import BadRequest
