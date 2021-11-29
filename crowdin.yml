@@ -1,3 +1,0 @@
-files:
-  - source: HatsuneRobot/localization/en.yaml 
-    translation: /**/HatsuneRobot/localization/%locale_with_underscore%.yaml
