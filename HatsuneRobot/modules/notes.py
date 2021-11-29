@@ -237,7 +237,7 @@ def save(update: Update, context: CallbackContext):
         chat_id, note_name, text, data_type, buttons=buttons, file=content)
 
     msg.reply_text(
-        f"Yas! Added `{note_name}`.\nGet it with /get `{note_name}`, or `#{note_name}`",
+        f"OK! Added `{note_name}`.\nGet it with /get `{note_name}`, or `#{note_name}`",
         parse_mode=ParseMode.MARKDOWN)
 
     if msg.reply_to_message and msg.reply_to_message.from_user.is_bot:
@@ -482,7 +482,7 @@ def __import_data__(chat_id, data):
 
 
 def __stats__():
-    return f"• {sql.num_notes()} notes, across {sql.num_chats()} chats."
+    return "{} notes, across {} chats.".format(sql.num_notes(), sql.num_chats())
 
 
 def __migrate__(old_chat_id, new_chat_id):
