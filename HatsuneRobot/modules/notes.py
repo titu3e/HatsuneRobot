@@ -5,7 +5,6 @@ from typing import Optional
 
 import HatsuneRobot.modules.sql.notes_sql as sql
 from HatsuneRobot import LOGGER, JOIN_LOGGER, SUPPORT_CHAT, dispatcher, DRAGONS
-from HatsuneRobot.modules.disable import DisableAbleCommandHandler
 from HatsuneRobot.modules.helper_funcs.handlers import MessageHandlerChecker
 from HatsuneRobot.modules.helper_funcs.chat_status import user_admin, connection_status
 from HatsuneRobot.modules.helper_funcs.misc import (build_keyboard,
