@@ -83,8 +83,8 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 *Hello {} !*
 ────────────────────────
-✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
-✪ Maintained by @ZenitsuID ✨
+✪ ɪ'ᴍ ᴀɴ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇ ʙᴏᴛ ᴅᴇsɪɢɴᴇᴅ ᴛᴏ ʜᴇʟᴘ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ ᴡɪᴛʜ ᴀ ʟᴏᴛ ғᴇᴀᴛᴜʀᴇs.
+✪ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ @ZenitsuID ✨
 ────────────────────────
 Hit the /help to see available command.
 """
@@ -105,7 +105,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="➗ ᴀᴅᴅ sᴋʏᴢᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/HatsuneMikuRobot?startgroup=new"
+            text="➗ ᴀᴅᴅ ʜᴀᴛsᴜɴᴇ ᴍɪᴋᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/HatsuneMikuRobot?startgroup=new"
         ),
     ],
 ]
@@ -113,7 +113,7 @@ buttons = [
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
-EMI_IMG = "https://telegra.ph/file/56811b69cbcece20bbebf.jpg"
+hatsune_IMG = "https://telegra.ph/file/b2f3b095387faad48680d.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
  You can support the project by contacting @ZenitsuID \
@@ -459,14 +459,14 @@ def Hatsune_about_callback(update, context):
     elif query.data == "Hatsune_support":
         query.message.edit_text(
             text="*๏ Hatsune Miku support chats*"
-            "\nJoin My Support Group/Channel for see or report a problem on ZenitsuID.",
+            "\nJoin My Logs Group/Federation for see or report a problem on ZenitsuID.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ​", url="t.me/HatsuneMinuSupport"),
+                        InlineKeyboardButton(text="ʟᴏɢs​", url="t.me/HatsuneMikuLogs"),
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇs​", url="https://t.me/ProjectSkyzu"
+                            text="ғᴇᴅᴇʀᴀᴛɪᴏɴ​", url="https://t.me/HatsuneMikuFed"
                         ),
                     ],
                     [
