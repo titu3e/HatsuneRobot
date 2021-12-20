@@ -1,7 +1,14 @@
+# HATSUNE - MIKU
+# Copyright (C) 2022 By ZenitsuID #M•R•T™
+#
+# This file is a part of < https://github.com/ZenitsuID/HatsuneMiku/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/ZenitsuID/HatsuneMiku/blob/main/LICENSE/>.
+
 from math import ceil
 from typing import Dict, List
 
-from HatsuneRobot import NO_LOAD
+from HatsuneMiku import NO_LOAD
 from telegram import MAX_MESSAGE_LENGTH, Bot, InlineKeyboardButton, ParseMode
 from telegram.error import TelegramError
 
@@ -64,8 +71,8 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     modulo_page = page_n % max_num_pages
 
     # can only have a certain amount of buttons side by side
-    if len(pairs) > 4:
-        pairs = pairs[modulo_page * 4:4 * (modulo_page + 1)] + [
+    if len(pairs) > 5:
+        pairs = pairs[modulo_page * 5:5 * (modulo_page + 1)] + [
             (EqInlineKeyboardButton("⬅️", callback_data="{}_prev({})".format(prefix, modulo_page)),
                 EqInlineKeyboardButton("Back", callback_data="Hatsune_back"),
              EqInlineKeyboardButton("➡️", callback_data="{}_next({})".format(prefix, modulo_page)))]
