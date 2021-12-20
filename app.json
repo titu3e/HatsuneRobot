@@ -6,10 +6,10 @@
          "advance",
          "group",
          "manager",
-         "naorobot"
+         "hatsunerobot"
       ],
     
-   "logo":    "https://telegra.ph/file/56811b69cbcece20bbebf.jpg",  
+   "logo": "https://telegra.ph/file/ecd4da115539220b2b10d.jpg",  
    "repository": "https://github.com/ZenitsuID/HatsuneRobot",
    "addons": [
           {
@@ -206,7 +206,7 @@
       "DONATION_LINK": {
          "description": "Optional: link where you would like to receive donations. If you are a noob, better leave it linking to paul",
          "required": false,
-         "value": "https://www.paypal.me/PaulSonOfLars"
+         "value": "https://www.paypal.me/ZenitsuID"
       },
       "DEL_CMDS": {
          "description": "Set this to True if you want to delete command messages from users who don't have the perms to run that command.",
