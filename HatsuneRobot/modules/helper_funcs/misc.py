@@ -1,10 +1,3 @@
-# HATSUNE - MIKU
-# Copyright (C) 2022 By ZenitsuID #M•R•T™
-#
-# This file is a part of < https://github.com/ZenitsuID/HatsuneMiku/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/ZenitsuID/HatsuneMiku/blob/main/LICENSE/>.
-
 from math import ceil
 from typing import Dict, List
 
