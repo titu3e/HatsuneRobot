@@ -83,8 +83,8 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 *Hello {} !*
 ────────────────────────
-✪ ɪ'ᴍ ᴀɴ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇ ʙᴏᴛ ᴅᴇsɪɢɴᴇᴅ ᴛᴏ ʜᴇʟᴘ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ ᴡɪᴛʜ ᴀ ʟᴏᴛ ғᴇᴀᴛᴜʀᴇs.
-✪ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ @ZenitsuID ✨
+✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
+✪ Maintained by @skyzu ✨
 ────────────────────────
 Hit the /help to see available command.
 """
@@ -94,18 +94,18 @@ buttons = [
         InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅ​", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Hatsune_"),
+        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Skyzu_"),
         InlineKeyboardButton(text="ᴛʀʏ ɪɴʟɪɴᴇ​", switch_inline_query_current_chat=""),
     ],
     [
         InlineKeyboardButton(
-            text="sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ​", url="https://github.com/ZenitsuID/HatsuneRobot"
+            text="sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ​", url="https://github.com/Skyzu/SkyzuRobot"
         ),
         InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ​", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
         InlineKeyboardButton(
-            text="➗ ᴀᴅᴅ ʜᴀᴛsᴜɴᴇ ᴍɪᴋᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/HatsuneMikuRobot?startgroup=new"
+            text="➗ ᴀᴅᴅ sᴋʏᴢᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/SkyzuRobot?startgroup=new"
         ),
     ],
 ]
@@ -113,10 +113,10 @@ buttons = [
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
-hatsune_IMG = "https://telegra.ph/file/b2f3b095387faad48680d.jpg"
+EMI_IMG = "https://telegra.ph/file/56811b69cbcece20bbebf.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project by contacting @ZenitsuID \
+ You can support the project by contacting @skyzu \
  Supporting isnt always financial! \
  Those who cannot provide monetary support are welcome to help us develop the bot at ."""
 
@@ -239,7 +239,7 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_text(
-            f"<b>Hi I'm Hatsune Miku robot!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
+            f"<b>Hi I'm Skyzu robot!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
             parse_mode=ParseMode.HTML,
         )
 
@@ -370,15 +370,15 @@ def Hatsune_about_callback(update, context):
     query = update.callback_query
     if query.data == "Hatsune_":
         query.message.edit_text(
-            text="๏ I'm *Hatsune Miku*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *Skyzu*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
             "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
             "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
             "\n• I check for admins' permissions before executing any command and more stuffs"
-            "\n\n_Hatsune's licensed under the GNU General Public License v3.0_"
-            "\n\n Click on button bellow to get basic help for HatsuneMikuRobot.",
+            "\n\n_Skyzu's licensed under the GNU General Public License v3.0_"
+            "\n\n Click on button bellow to get basic help for SkyzuRobot.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -431,7 +431,7 @@ def Hatsune_about_callback(update, context):
     elif query.data == "Hatsune_admin":
         query.message.edit_text(
             text=f"*๏ Let's make your group bit effective now*"
-            "\nCongragulations, HatsuneMikuRobot now ready to manage your group."
+            "\nCongragulations, SkyzuRobot now ready to manage your group."
             "\n\n*Admin Tools*"
             "\nBasic Admin tools help you to protect and powerup your group."
             "\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
@@ -458,15 +458,15 @@ def Hatsune_about_callback(update, context):
         )
     elif query.data == "Hatsune_support":
         query.message.edit_text(
-            text="*๏ Hatsune Miku support chats*"
-            "\nJoin My Logs Group/Federation for see or report a problem on ZenitsuID.",
+            text="*๏ Skyzu support chats*"
+            "\nJoin My Support Group/Channel for see or report a problem on Skyzu.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ʟᴏɢs​", url="t.me/HatsuneMikuLogs"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ​", url="t.me/skyzusupport"),
                         InlineKeyboardButton(
-                            text="ғᴇᴅᴇʀᴀᴛɪᴏɴ​", url="https://t.me/HatsuneMikuFed"
+                            text="ᴜᴘᴅᴀᴛᴇs​", url="https://t.me/ProjectSkyzu"
                         ),
                     ],
                     [
@@ -478,13 +478,13 @@ def Hatsune_about_callback(update, context):
 
     elif query.data == "Hatsune_credit":
         query.message.edit_text(
-            text=f"<b>๏ Credis for ZenitsuID</b>\n"
-            f"\nHere Developers Making The HatsuneMikuRobot",
+            text=f"<b>๏ Credis for Skyzu</b>\n"
+            f"\nHere Developers Making The SkyzuRobot",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ZenitsuID", url="t.me/ZenitsuID"),
+                        InlineKeyboardButton(text="Skyzu", url="t.me/skyzu"),
                     ],
                     [
                         InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_"),
@@ -803,7 +803,7 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}",
-                f"""**Hatsune Miku Robot Started!**
+                f"""**Skyzu Robot Started!**
 
 **Python:** `{memek()}`
 **Telegram Library:** `v{peler}`""",
