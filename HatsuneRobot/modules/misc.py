@@ -1,226 +1,132 @@
-import time
-import os
-import re
-import codecs
-from typing import List
-from random import randint
-from HatsuneRobot.modules.helper_funcs.chat_status import user_admin
-from HatsuneRobot.modules.disable import DisableAbleCommandHandler
-from HatsuneRobot import (
-    dispatcher,
-    WALL_API,
-)
-import requests as r
-import wikipedia
-from requests import get, post
-from telegram import (
-    Chat,
-    ChatAction,
-    Update,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    ParseMode,
-    Message,
-    MessageEntity,
-    TelegramError,
-)
-from telegram.error import BadRequest
-from telegram.ext.dispatcher import run_async
-from telegram.ext import CallbackContext, Filters, CommandHandler
-from HatsuneRobot import StartTime
-from HatsuneRobot.modules.helper_funcs.chat_status import sudo_plus
-from HatsuneRobot.modules.helper_funcs.alternate import send_action, typing_action
+from math import ceil
+from typing import Dict, List
 
-MARKDOWN_HELP = f"""
-Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that \
-saved messages are correctly parsed, and to allow you to create buttons.
-
-❂ <code>_italic_</code>: wrapping text with '_' will produce italic text
-❂ <code>*bold*</code>: wrapping text with '*' will produce bold text
-❂ <code>`code`</code>: wrapping text with '`' will produce monospaced text, also known as 'code'
-❂ <code>[sometext](someURL)</code>: this will create a link - the message will just show <code>sometext</code>, \
-and tapping on it will open the page at <code>someURL</code>.
-<b>Example:</b><code>[test](example.com)</code>
-
-❂ <code>[buttontext](buttonurl:someURL)</code>: this is a special enhancement to allow users to have telegram \
-buttons in their markdown. <code>buttontext</code> will be what is displayed on the button, and <code>someurl</code> \
-will be the url which is opened.
-<b>Example:</b> <code>[This is a button](buttonurl:example.com)</code>
-
-If you want multiple buttons on the same line, use :same, as such:
-<code>[one](buttonurl://example.com)
-[two](buttonurl://google.com:same)</code>
-This will create two buttons on a single line, instead of one button per line.
-
-Keep in mind that your message <b>MUST</b> contain some text other than just a button!
-"""
+from HatsuneRobot import NO_LOAD
+from telegram import MAX_MESSAGE_LENGTH, Bot, InlineKeyboardButton, ParseMode
+from telegram.error import TelegramError
 
 
-@user_admin
-def echo(update: Update, context: CallbackContext):
-    args = update.effective_message.text.split(None, 1)
-    message = update.effective_message
+class EqInlineKeyboardButton(InlineKeyboardButton):
+    def __eq__(self, other):
+        return self.text == other.text
 
-    if message.reply_to_message:
-        message.reply_to_message.reply_text(
-            args[1], parse_mode="MARKDOWN", disable_web_page_preview=True
-        )
+    def __lt__(self, other):
+        return self.text < other.text
+
+    def __gt__(self, other):
+        return self.text > other.text
+
+
+def split_message(msg: str) -> List[str]:
+    if len(msg) < MAX_MESSAGE_LENGTH:
+        return [msg]
+
+    lines = msg.splitlines(True)
+    small_msg = ""
+    result = []
+    for line in lines:
+        if len(small_msg) + len(line) < MAX_MESSAGE_LENGTH:
+            small_msg += line
+        else:
+            result.append(small_msg)
+            small_msg = line
     else:
-        message.reply_text(
-            args[1], quote=False, parse_mode="MARKDOWN", disable_web_page_preview=True
-        )
-    message.delete()
+        # Else statement at the end of the for loop, so append the leftover string.
+        result.append(small_msg)
+
+    return result
 
 
-def markdown_help_sender(update: Update):
-    update.effective_message.reply_text(MARKDOWN_HELP, parse_mode=ParseMode.HTML)
-    update.effective_message.reply_text(
-        "Try forwarding the following message to me, and you'll see, and Use #test!"
-    )
-    update.effective_message.reply_text(
-        "/save test This is a markdown test. _italics_, *bold*, code, "
-        "[URL](example.com) [button](buttonurl:github.com) "
-        "[button2](buttonurl://google.com:same)"
-    )
-
-
-def markdown_help(update: Update, context: CallbackContext):
-    if update.effective_chat.type != "private":
-        update.effective_message.reply_text(
-            "Contact me in pm",
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            "Markdown help",
-                            url=f"t.me/{context.bot.username}?start=markdownhelp",
-                        )
-                    ]
-                ]
-            ),
-        )
-        return
-    markdown_help_sender(update)
-
-
-def wiki(update: Update, context: CallbackContext):
-    kueri = re.split(pattern="wiki", string=update.effective_message.text)
-    wikipedia.set_lang("en")
-    if len(str(kueri[1])) == 0:
-        update.effective_message.reply_text("Enter keywords!")
+def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
+    if not chat:
+        modules = sorted(
+            [EqInlineKeyboardButton(x.__mod_name__,
+                                    callback_data="{}_module({})".format(prefix, x.__mod_name__.lower())) for x
+             in module_dict.values()])
     else:
+        modules = sorted(
+            [EqInlineKeyboardButton(x.__mod_name__,
+                                    callback_data="{}_module({},{})".format(prefix, chat, x.__mod_name__.lower())) for x
+             in module_dict.values()])
+
+    pairs = [
+    modules[i * 3:(i + 1) * 3] for i in range((len(modules) + 3 - 1) // 3)
+    ]
+
+    round_num = len(modules) / 3
+    calc = len(modules) - round(round_num)
+    if calc == 1:
+        pairs.append((modules[-1], ))
+    elif calc == 2:
+        pairs.append((modules[-1], ))
+
+    max_num_pages = ceil(len(pairs) / 10)
+    modulo_page = page_n % max_num_pages
+
+    # can only have a certain amount of buttons side by side
+    if len(pairs) > 8:
+        pairs = pairs[modulo_page * 8:8 * (modulo_page + 1)] + [
+            (EqInlineKeyboardButton("⬅️", callback_data="{}_prev({})".format(prefix, modulo_page)),
+                EqInlineKeyboardButton("Back", callback_data="Hatsune_back"),
+             EqInlineKeyboardButton("➡️", callback_data="{}_next({})".format(prefix, modulo_page)))]
+
+    else:
+        pairs += [[EqInlineKeyboardButton("Back", callback_data="Hatsune_back")]]
+
+    return pairs
+
+
+def send_to_list(
+    bot: Bot, send_to: list, message: str, markdown=False, html=False
+) -> None:
+    if html and markdown:
+        raise Exception("Can only send with either markdown or HTML!")
+    for user_id in set(send_to):
         try:
-            pertama = update.effective_message.reply_text("🔄 Loading...")
-            keyboard = InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="🔧 More Info...",
-                            url=wikipedia.page(kueri).url,
-                        )
-                    ]
-                ]
-            )
-            context.bot.editMessageText(
-                chat_id=update.effective_chat.id,
-                message_id=pertama.message_id,
-                text=wikipedia.summary(kueri, sentences=10),
-                reply_markup=keyboard,
-            )
-        except wikipedia.PageError as e:
-            update.effective_message.reply_text(f"⚠ Error: {e}")
-        except BadRequest as et:
-            update.effective_message.reply_text(f"⚠ Error: {et}")
-        except wikipedia.exceptions.DisambiguationError as eet:
-            update.effective_message.reply_text(
-                f"⚠ Error\n There are too many query! Express it more!\nPossible query result:\n{eet}"
-            )
+            if markdown:
+                bot.send_message(user_id, message, parse_mode=ParseMode.MARKDOWN)
+            elif html:
+                bot.send_message(user_id, message, parse_mode=ParseMode.HTML)
+            else:
+                bot.send_message(user_id, message)
+        except TelegramError:
+            pass  # ignore users who fail
 
 
-@send_action(ChatAction.UPLOAD_PHOTO)
-def wall(update: Update, context: CallbackContext):
-    chat_id = update.effective_chat.id
-    msg = update.effective_message
-    msg_id = update.effective_message.message_id
-    args = context.args
-    query = " ".join(args)
-    if not query:
-        msg.reply_text("Please enter a query!")
-        return
-    caption = query
-    term = query.replace(" ", "%20")
-    json_rep = r.get(
-        f"https://wall.alphacoders.com/api2.0/get.php?auth={WALL_API}&method=search&term={term}"
-    ).json()
-    if not json_rep.get("success"):
-        msg.reply_text("An error occurred!")
+def build_keyboard(buttons):
+    keyb = []
+    for btn in buttons:
+        if btn.same_line and keyb:
+            keyb[-1].append(InlineKeyboardButton(btn.name, url=btn.url))
+        else:
+            keyb.append([InlineKeyboardButton(btn.name, url=btn.url)])
 
-    else:
-        wallpapers = json_rep.get("wallpapers")
-        if not wallpapers:
-            msg.reply_text("No results found! Refine your search.")
-            return
-        index = randint(0, len(wallpapers) - 1)  # Choose random index
-        wallpaper = wallpapers[index]
-        wallpaper = wallpaper.get("url_image")
-        wallpaper = wallpaper.replace("\\", "")
-        context.bot.send_photo(
-            chat_id,
-            photo=wallpaper,
-            caption="Preview",
-            reply_to_message_id=msg_id,
-            timeout=60,
-        )
-        context.bot.send_document(
-            chat_id,
-            document=wallpaper,
-            filename="wallpaper",
-            caption=caption,
-            reply_to_message_id=msg_id,
-            timeout=60,
-        )
+    return keyb
 
 
-__help__ = """
-*Available commands:*
+def revert_buttons(buttons):
+    res = ""
+    for btn in buttons:
+        if btn.same_line:
+            res += "\n[{}](buttonurl://{}:same)".format(btn.name, btn.url)
+        else:
+            res += "\n[{}](buttonurl://{})".format(btn.name, btn.url)
 
-❂ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
-❂ /paste*:* Saves replied content to `nekobin.com` and replies with a url
-❂ /react*:* Reacts with a random reaction 
-❂ /ud <word>*:* Type the word or expression you want to search use
-❂ /reverse*:* Does a reverse image search of the media which it was replied to.
-❂ /wiki <query>*:* wikipedia your query
-❂ /wall <query>*:* get a wallpaper from wall.alphacoders.com
-❂ /cash*:* currency converter
- Example:
- `/cash 1 USD INR`  
-      _OR_
- `/cash 1 usd inr`
- Output: `1.0 USD = 75.505 INR`
+    return res
 
-*Music Modules:*
-❂ /video or /vsong (query): download video from youtube
-❂ /music or /song (query): download song from yt servers. (API BASED)
-❂ /lyrics (song name) : This plugin searches for song lyrics with song name.
-"""
 
-ECHO_HANDLER = DisableAbleCommandHandler(
-    "echo", echo, filters=Filters.chat_type.groups, run_async=True
-)
-MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, run_async=True)
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
-WALLPAPER_HANDLER = DisableAbleCommandHandler("wall", wall, run_async=True)
+def build_keyboard_parser(bot, chat_id, buttons):
+    keyb = []
+    for btn in buttons:
+        if btn.url == "{rules}":
+            btn.url = "http://t.me/{}?start={}".format(bot.username, chat_id)
+        if btn.same_line and keyb:
+            keyb[-1].append(InlineKeyboardButton(btn.name, url=btn.url))
+        else:
+            keyb.append([InlineKeyboardButton(btn.name, url=btn.url)])
 
-dispatcher.add_handler(ECHO_HANDLER)
-dispatcher.add_handler(MD_HELP_HANDLER)
-dispatcher.add_handler(WIKI_HANDLER)
-dispatcher.add_handler(WALLPAPER_HANDLER)
+    return keyb
 
-__mod_name__ = "Extras"
-__command_list__ = ["id", "echo", "wiki", "wall"]
-__handlers__ = [
-    ECHO_HANDLER,
-    MD_HELP_HANDLER,
-    WIKI_HANDLER,
-    WALLPAPER_HANDLER,
-]
+
+def is_module_loaded(name):
+    return name not in NO_LOAD
