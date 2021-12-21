@@ -812,7 +812,8 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}",
-                f"""**Hatsune Miku Robot Started!** ✨
+                f"""**Hatsune Miku Robot Started!**
+                f"\n\nDynos heroku {day} days left"
 
 **Python:** `{memek()}`
 **Telegram Library:** `v{peler}`""",
