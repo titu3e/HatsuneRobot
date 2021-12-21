@@ -478,7 +478,7 @@ def hatsune_about_callback(update, context):
 
     elif query.data == "hatsune_credit":
         query.message.edit_text(
-            text=f"<b>๏ Credis for ZenitsuID</b>\n"
+            text=f"<b>๏ Credits for ZenitsuID</b>\n"
             f"\nHere Developers Making The Hatsune Miku",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
@@ -498,12 +498,12 @@ def source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text="๏›› This Bot List By Hatsune Miku Projects.",
+            text="๏›› Bot List By Hatsune Miku Projects.",
             parse_mode=ParseMode.HTML,
             reply_markup=ParseMode.MARKDOWN(
                 [
                     [
-                        InlineKeyboardButton(text="ᴍᴀɴᴀɢᴇʀ ɢʀᴏᴜᴘs​", url="https://github.com/ZenitsuID/HatsuneRobot")
+                        InlineKeyboardButton(text="ᴍᴀɴᴀɢᴇʀ ɢʀᴏᴜᴘs​", url="https://github.com/ZenitsuID/HatsuneRobot"),
                         InlineKeyboardButton(
                             text="ʟᴇᴇᴄʜ ʙᴏᴛ​", url="https://github.com/ZenitsuID/Hatsune-Leech-Bot"
                         ),
