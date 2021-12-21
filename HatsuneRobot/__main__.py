@@ -494,13 +494,13 @@ def hatsune_about_callback(update, context):
         )
 
 
-def Source_about_callback(update, context):
+def source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
             text="๏›› This Bot List By Hatsune Miku Projects.",
             parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
+            reply_markup=ParseMode.MARKDOWN(
                 [
                     [
                         InlineKeyboardButton(text="ᴍᴀɴᴀɢᴇʀ ɢʀᴏᴜᴘs​", url="https://github.com/ZenitsuID/HatsuneRobot")
