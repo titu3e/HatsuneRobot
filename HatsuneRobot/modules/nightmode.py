@@ -186,7 +186,7 @@ scheduler = AsyncIOScheduler(timezone="Asia/Jakarta")
 scheduler.add_job(job_open, trigger="cron", hour=5, minute=58)
 scheduler.start()
 
-__help__"""
+__help__ = """
 Here is the help for the NightMode module:
 ❂ /nightmode <userhandle> x(on/off)`*:* Adds Group to NightMode Chats
 
