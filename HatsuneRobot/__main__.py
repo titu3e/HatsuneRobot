@@ -499,7 +499,7 @@ def Source_about_callback(update, context):
     if query.data == "source_":
         query.message.edit_text(
             text="๏›› This Bot List By Hatsune Miku Projects.",
-            parse_mode=ParseMode.MARKDOWN,
+            parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -528,8 +528,6 @@ def Source_about_callback(update, context):
             timeout=60,
             disable_web_page_preview=True,
         )
-
-
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
