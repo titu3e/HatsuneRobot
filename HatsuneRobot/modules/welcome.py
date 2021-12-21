@@ -15,7 +15,7 @@ from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, CallbackQueryHandler
 from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
 
-import ee as sql
+
 from HatsuneRobot import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP
 from HatsuneRobot.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
 from HatsuneRobot.modules.helper_funcs.misc import build_keyboard, revert_buttons
