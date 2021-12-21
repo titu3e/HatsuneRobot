@@ -401,7 +401,7 @@ def hatsune_about_callback(update, context):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ʙᴏᴛ ʟɪsᴛ​", callback_data="source_"
+                            text="ʙᴏᴛ ʟɪsᴛ​​", callback_data="source_"
                         ),
                     ],
                     [
@@ -478,7 +478,7 @@ def hatsune_about_callback(update, context):
 
     elif query.data == "hatsune_credit":
         query.message.edit_text(
-            text=f"<b>๏ Credits for ZenitsuID</b>\n"
+            text=f"<b>๏ Credis for ZenitsuID</b>\n"
             f"\nHere Developers Making The Hatsune Miku",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
@@ -494,24 +494,18 @@ def hatsune_about_callback(update, context):
         )
 
 
-def source_about_callback(update, context):
+def Source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text="๏›› Bot List By Hatsune Miku Projects.",
-            parse_mode=ParseMode.HTML,
-            reply_markup=ParseMode.MARKDOWN(
-                [
-                    [
-                        InlineKeyboardButton(text="ᴍᴀɴᴀɢᴇʀ ɢʀᴏᴜᴘs​", url="https://github.com/ZenitsuID/HatsuneRobot"),
-                        InlineKeyboardButton(
-                            text="ʟᴇᴇᴄʜ ʙᴏᴛ​", url="https://github.com/ZenitsuID/Hatsune-Leech-Bot"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_"),
-                    ],
-                ]
+            text="๏›› List of bots managed by the Hatsune Miku Project."
+            "\n\n• *Manager Groups:* @HatsuneMikuRobot"
+            "\n\n • *Leech Bot:* @HatsuneRobot"
+            "\n\n • *Userbot:* @HatsuneUserbot",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_")]]
             ),
         )
     elif query.data == "source_back":
@@ -528,6 +522,8 @@ def source_about_callback(update, context):
             timeout=60,
             disable_web_page_preview=True,
         )
+
+
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
@@ -831,7 +827,7 @@ def main():
     )
 
     source_callback_handler = CallbackQueryHandler(
-        source_about_callback, pattern=r"source_", run_async=True
+        Source_about_callback, pattern=r"source_", run_async=True
     )
 
     donate_handler = CommandHandler("donate", donate, run_async=True)
