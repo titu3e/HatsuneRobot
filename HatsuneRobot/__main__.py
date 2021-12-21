@@ -97,9 +97,11 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Hello [🤗](https://telegra.ph/file/b2f3b095387faad48680d.jpg), ɪ'ᴍ ᴀɴ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇ ʙᴏᴛ ᴅᴇsɪɢɴᴇᴅ ᴛᴏ ʜᴇʟᴘ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ ᴡɪᴛʜ ᴀ ʟᴏᴛ ғᴇᴀᴛᴜʀᴇs.
-ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ @ZenitsuID
-`ɪ'ᴍ ʜᴇʀᴇ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘꜱ! ʜɪᴛ` /help
+*Hello {} !*
+────────────────────────
+✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
+✪ Maintained by @skyzu ✨
+────────────────────────
 """
 
 buttons = [
@@ -124,8 +126,7 @@ buttons = [
 ]
 
 HELP_STRINGS = """
-`ʜɪ.. ɪ'ᴍ` [Hatsune Miku](https://telegra.ph/file/b2f3b095387faad48680d.jpg) 
-`ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴꜱ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ꜱᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇꜱ..`"""
+Click on the button bellow to get description about specifics command."""
 
 hatsune_IMG = "https://telegra.ph/file/b2f3b095387faad48680d.jpg"
 
@@ -218,7 +219,7 @@ def start(update: Update, context: CallbackContext):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="Go Back", callback_data="help_back"
+                                    text="Back", callback_data="help_back"
                                 )
                             ]
                         ]
@@ -339,7 +340,7 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="Go Back", callback_data="help_back")]]
+                    [[InlineKeyboardButton(text="Back", callback_data="help_back")]]
                 ),
             )
 
@@ -420,7 +421,7 @@ def hatsune_about_callback(update, context):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ʙᴀᴄᴋ​", callback_data="hatsune_back"
+                            text="Back​", callback_data="hatsune_back"
                         ),
                     ],
                 ]
@@ -455,7 +456,7 @@ def hatsune_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ​", callback_data="hatsune_")]]
+                [[InlineKeyboardButton(text="Back​", callback_data="hatsune_")]]
             ),
         )
 
@@ -467,7 +468,7 @@ def hatsune_about_callback(update, context):
             f"\n\nYou can also set buttons for notes and filters (refer help menu)",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ​", callback_data="hatsune_")]]
+                [[InlineKeyboardButton(text="Back​", callback_data="hatsune_")]]
             ),
         )
     elif query.data == "hatsune_support":
@@ -484,7 +485,7 @@ def hatsune_about_callback(update, context):
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="ʙᴀᴄᴋ​", callback_data="hatsune_"),
+                        InlineKeyboardButton(text="Back​", callback_data="hatsune_"),
                     ],
                 ]
             ),
@@ -501,7 +502,7 @@ def hatsune_about_callback(update, context):
                         InlineKeyboardButton(text="ᴢᴇɴɪᴛsᴜɪᴅ", url="t.me/ZenitsuID"),
                     ],
                     [
-                        InlineKeyboardButton(text="ʙᴀᴄᴋ​", callback_data="hatsune_"),
+                        InlineKeyboardButton(text="Back​", callback_data="hatsune_"),
                     ],
                 ]
             ),
@@ -519,7 +520,7 @@ def Source_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ​", callback_data="hatsune_")]]
+                [[InlineKeyboardButton(text="Back​", callback_data="hatsune_")]]
             ),
         )
     elif query.data == "source_back":
@@ -589,7 +590,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ​", callback_data="help_back")]]
+                [[InlineKeyboardButton(text="Back​", callback_data="help_back")]]
             ),
         )
 
@@ -661,7 +662,7 @@ def settings_button(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="ʙᴀᴄᴋ​",
+                                text="Back​",
                                 callback_data="stngs_back({})".format(chat_id),
                             )
                         ]
