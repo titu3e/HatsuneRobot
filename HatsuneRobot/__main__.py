@@ -368,7 +368,7 @@ def help_button(update, context):
 
 def hatsune_about_callback(update, context):
     query = update.callback_query
-    if query.data == "Hatsune_":
+    if query.data == "hatsune_":
         query.message.edit_text(
             text="๏ I'm *Hatsune Miku*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
@@ -377,7 +377,7 @@ def hatsune_about_callback(update, context):
             "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
             "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
             "\n• I check for admins' permissions before executing any command and more stuffs"
-            "\n\n_Hatsune's licensed under the GNU General Public License v3.0_"
+            "\n\n_Hatsune Miku's licensed under the GNU General Public License v3.0_"
             "\n\n Click on button bellow to get basic help for HatsuneMikuRobot.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -406,7 +406,7 @@ def hatsune_about_callback(update, context):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_back"
+                            text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_back"
                         ),
                     ],
                 ]
@@ -754,7 +754,7 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 1606221784:
+        if OWNER_ID != 1334185337:
             update.effective_message.reply_text(
                 "I'm free for everyone ❤️ If you wanna make me smile, just join"
                 "[My Channel]({})".format(DONATION_LINK),
@@ -803,7 +803,7 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}",
-                f"""**Hatsune Miku Robot Started!**
+                f"""**Hatsune Miku Robot Started!** ✨
 
 **Python:** `{memek()}`
 **Telegram Library:** `v{peler}`""",
@@ -830,7 +830,7 @@ def main():
     )
 
     about_callback_handler = CallbackQueryHandler(
-        Hatsune_about_callback, pattern=r"Hatsune_", run_async=True
+        hatsune_about_callback, pattern=r"hatsune_", run_async=True
     )
 
     source_callback_handler = CallbackQueryHandler(
