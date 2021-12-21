@@ -232,7 +232,7 @@ dispatcher.add_handler(MD_HELP_HANDLER)
 dispatcher.add_handler(WIKI_HANDLER)
 dispatcher.add_handler(WALLPAPER_HANDLER)
 
-__mod_name__ = "ᴇxᴛʀᴀs"
+__mod_name__ = "Extras"
 __command_list__ = ["id", "echo", "wiki", "wall"]
 __handlers__ = [
     ECHO_HANDLER,

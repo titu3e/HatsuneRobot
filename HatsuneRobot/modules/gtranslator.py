@@ -32,6 +32,7 @@ from HatsuneRobot.modules.disable import DisableAbleCommandHandler
 
 __help__ = """ 
 Use this module to translate stuff!
+
 *Commands:*
 ❂ /tl (or /tr): as a reply to a message, translates it to English.
 ❂ /tl <lang>: translates to <lang>
@@ -53,7 +54,7 @@ sm,sn,so,sq,sr,st,su,sv,sw,ta,te,tg,th,tl,tr,uk,ur,uz,
 vi,xh,yi,yo,zh,zh_CN,zh_TW,zu`
 """
 
-__mod_name__ = "ᴛʀᴀɴsʟᴀᴛᴏʀ"
+__mod_name__ = "G-Trans"
 
 
 trans = Translator()

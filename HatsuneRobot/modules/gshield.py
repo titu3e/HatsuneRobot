@@ -333,38 +333,17 @@ async def del_profanity(event):
                     await dev.delete()
                     
 __help__ = """
-- /runs - reply a random string from an array of replies
-- /slap - slap a user, or get slapped if not a reply
-- /shrug - get shrug XD
-- /table - get flip/unflip
-- /decide - Randomly answers yes/no/maybe
-- /toss - Tosses A coin
-- /bluetext - check urself
-- /roll - Roll a dice
-- /rlg - Join ears,nose,mouth and create an emo
-- /shout - <keyword> write anything you want to give loud shout
-- /weebify - <text> returns a weebified text
-- /sanitize - always use this before /pat or any contact
-- /pat - pats a user, or get patted
-- /8ball - predicts using 8ball method
+Here is the help for the Shield module:
 
-*Animation*
-- /love 
-- /hack 
-- /bombs 
+*Group Guardian:*
+✪ Hatsune Miku can protect your group from NSFW senders, Slag word users and also can force members to use English
 
-*Shippering*
-- /couples - get couples of today
-
-*Here Is The Help For The Styletext Module:*
-- /weebify - <text>: weebify your text!
-- /bubble - <text>: bubble your text!
-- /fbubble - <text>: bubble-filled your text!
-- /square - <text>: square your text!
-- /fsquare - <text>: square-filled your text!
-- /blue - <text>: bluify your text!
-- /latin - <text>: latinify your text!
-- /lined - <text>: lined your text!
+*Commmands*
+✪ /gshield <i>on/off</i> - Enable|Disable Porn cleaning
+✪ /globalmode <i>on/off</i> - Enable|Disable English only mode
+✪ /profanity <i>on/off</i> - Enable|Disable slag word cleaning
+ 
+Note: Special credits goes to Julia project and Friday Userbot
 """
 
 __mod_name__ = "Shield"

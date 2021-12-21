@@ -195,13 +195,13 @@ def config(client, message):
 
 __help__ = """
 *Force Subscribe:*
-
 ❂ Hatsune Miku can mute members who are not subscribed your channel until they subscribe
-❂ When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
-❂*Setup*
+❂ When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them.
+
+*Setup*
 *Only creator*
-❂ Add me in your group as admin
-❂ Add me in your channel as admin 
+Add me in your group as admin
+Add me in your channel as admin 
  
 *Commmands*
 ❂ /fsub {channel username} - To turn on and setup the channel.
@@ -226,4 +226,4 @@ Feds are now divided into 3 sections for your ease.
 • `/fedadminhelp`*:* Provides help for fed administration commands
 • `/feduserhelp`*:* Provides help for commands anyone can use
 """
-__mod_name__ = "F-Sub/Feds"
+__mod_name__ = "F-Sub"
