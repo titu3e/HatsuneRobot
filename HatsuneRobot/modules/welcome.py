@@ -358,8 +358,8 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         {
                             (chat.id, new_mem.id): {
                                 "should_welc": should_welc,
-                                "media_wel": True,
-                                "status": True,
+                                "media_wel": False,
+                                "status": False,
                                 "update": update,
                                 "res": res,
                                 "keyboard": keyboard,
@@ -1264,6 +1264,29 @@ def __chat_settings__(chat_id, _):
         "This chat has it's welcome preference set to `{}`.\n"
         "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
     )
+    
+@user_admin
+def security(update, context) -> str:
+    chat = update.effective_chat  # type: Optional[Chat]
+    bot = context.bot
+    args = context.args
+    if len(args) >= 1:
+        var = args[0]
+        print(var)
+        if (var == "no" or var == "off"):
+            sql.set_welcome_security(chat.id, False)
+            update.effective_message.reply_text("Disabled welcome security")
+        elif(var == "soft"):
+            sql.set_welcome_security(chat.id, "soft")
+            update.effective_message.reply_text("I will restrict user's permission to send media for 24 hours")
+        elif(var == "hard"):
+            sql.set_welcome_security(chat.id, "hard")
+            update.effective_message.reply_text("New users will be muted if they do not click on the button")
+        else:
+            update.effective_message.reply_text("Please enter `off`/`no`/`soft`/`hard`!", parse_mode=ParseMode.MARKDOWN)
+    else:
+        status = sql.welcome_security(chat.id)
+        update.effective_message.reply_text(status)
 
 
 __help__ = """
@@ -1279,6 +1302,7 @@ __help__ = """
 ❂ /cleanwelcome <on/off>*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
 ❂ /welcomemutehelp*:* gives information about welcome mutes.
 ❂ /cleanservice <on/off*:* deletes telegrams welcome/left service messages.
+ - /welcomesecurity <off/soft/hard>: soft - restrict user's permission to send media files for 24 hours, hard - restict user's permission to send messages until they click on the button \"I'm not a bot\"
 
  *Example:*
 user joined chat, user left chat.
@@ -1312,7 +1336,7 @@ RESET_GOODBYE = CommandHandler(
     "resetgoodbye", reset_goodbye, filters=Filters.chat_type.groups, run_async=True
 )
 WELCOMEMUTE_HANDLER = CommandHandler(
-    "welcomemute", welcomemute, pass_args=True, filters=Filters.chat_type.groups, run_async=True
+    "welcomemute", welcomemute, filters=Filters.chat_type.groups, run_async=True
 )
 CLEAN_SERVICE_HANDLER = CommandHandler(
     "cleanservice", cleanservice, filters=Filters.chat_type.groups, run_async=True
@@ -1325,9 +1349,10 @@ WELCOME_MUTE_HELP = CommandHandler("welcomemutehelp", welcome_mute_help, run_asy
 BUTTON_VERIFY_HANDLER = CallbackQueryHandler(
     user_button, pattern=r"user_join_", run_async=True
 )
+SECURITY_HANDLER = CommandHandler("welcomesecurity", security, pass_args=True, filters=Filters.chat_type.groups, run_async=True)
 CAPTCHA_BUTTON_VERIFY_HANDLER = CallbackQueryHandler(
     user_captcha_button,
-    pattern=r"user_captcha_join_\([\d\-]+,\d+\)_\(\d{4}\)",
+    pattern=r"user_captchajoin_\([\d\-]+,\d+\)_\(\d{4}\)",
     run_async=True,
 )
 
@@ -1345,9 +1370,10 @@ dispatcher.add_handler(WELCOMEMUTE_HANDLER)
 dispatcher.add_handler(CLEAN_SERVICE_HANDLER)
 dispatcher.add_handler(BUTTON_VERIFY_HANDLER)
 dispatcher.add_handler(WELCOME_MUTE_HELP)
+dispatcher.add_handler(SECURITY_HANDLER)
 dispatcher.add_handler(CAPTCHA_BUTTON_VERIFY_HANDLER)
 
-__mod_name__ = "Greetings"
+__mod_name__ = "ɢʀᴇᴇᴛɪɴɢs"
 __command_list__ = []
 __handlers__ = [
     NEW_MEM_HANDLER,
