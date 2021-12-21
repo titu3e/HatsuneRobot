@@ -358,8 +358,8 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         {
                             (chat.id, new_mem.id): {
                                 "should_welc": should_welc,
-                                "media_wel": False,
-                                "status": False,
+                                "media_wel": True,
+                                "status": True,
                                 "update": update,
                                 "res": res,
                                 "keyboard": keyboard,
