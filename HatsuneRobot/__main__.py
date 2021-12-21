@@ -97,7 +97,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hello {} [🤗](https://telegra.ph/file/ebf62ff4c5668adcfa28c.jpg),!
+Hello [🤗](https://telegra.ph/file/ebf62ff4c5668adcfa28c.jpg)!
 ────────────────────────
 ✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
 ✪ Maintained by @ZenitsuID ✨
