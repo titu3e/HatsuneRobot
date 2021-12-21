@@ -124,7 +124,7 @@ buttons = [
 ]
 
 HELP_STRINGS = """
-`ʜɪ.. ɪ'ᴍ` [ʜᴀᴛsᴜɴᴇ ᴍɪᴋᴜ](https://telegra.ph/file/b2f3b095387faad48680d.jpg) 
+`ʜɪ.. ɪ'ᴍ` [Hatsune Miku](https://telegra.ph/file/b2f3b095387faad48680d.jpg) 
 `ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴꜱ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ꜱᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇꜱ..`"""
 
 hatsune_IMG = "https://telegra.ph/file/b2f3b095387faad48680d.jpg"
