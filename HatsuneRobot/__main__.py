@@ -94,7 +94,7 @@ buttons = [
         InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅ​", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Hatsune_"),
+        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="hatsune_"),
         InlineKeyboardButton(text="ᴛʀʏ ɪɴʟɪɴᴇ​", switch_inline_query_current_chat=""),
     ],
     [
@@ -118,7 +118,7 @@ hatsune_IMG = "https://telegra.ph/file/b2f3b095387faad48680d.jpg"
 DONATE_STRING = """Heya, glad to hear you want to donate!
  You can support the project by contacting @ZenitsuID \
  Supporting isnt always financial! \
- Those who cannot provide monetary support are welcome to help us develop the bot at ."""
+ Those who cannot provide monetary support are welcome to help us develop the bot at."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -239,7 +239,7 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_text(
-            f"<b>Hi I'm Hatsune Miku robot!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
+            f"<b>Hi I'm Hatsune Miku!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
             parse_mode=ParseMode.HTML,
         )
 
@@ -366,7 +366,7 @@ def help_button(update, context):
         pass
 
 
-def Hatsune_about_callback(update, context):
+def hatsune_about_callback(update, context):
     query = update.callback_query
     if query.data == "Hatsune_":
         query.message.edit_text(
@@ -385,18 +385,18 @@ def Hatsune_about_callback(update, context):
                 [
                     [
                         InlineKeyboardButton(
-                            text="ᴀᴅᴍɪɴs​", callback_data="Hatsune_admin"
+                            text="ᴀᴅᴍɪɴs​", callback_data="hatsune_admin"
                         ),
                         InlineKeyboardButton(
-                            text="ɴᴏᴛᴇs​", callback_data="Hatsune_notes"
+                            text="ɴᴏᴛᴇs​", callback_data="hatsune_notes"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="sᴜᴘᴘᴏʀᴛ​", callback_data="Hatsune_support"
+                            text="sᴜᴘᴘᴏʀᴛ​", callback_data="hatsune_support"
                         ),
                         InlineKeyboardButton(
-                            text="ᴄʀᴇᴅɪᴛs​", callback_data="Hatsune_credit"
+                            text="ᴄʀᴇᴅɪᴛs​", callback_data="hatsune_credit"
                         ),
                     ],
                     [
@@ -412,7 +412,7 @@ def Hatsune_about_callback(update, context):
                 ]
             ),
         )
-    elif query.data == "Hatsune_back":
+    elif query.data == "hatsune_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -428,7 +428,7 @@ def Hatsune_about_callback(update, context):
             disable_web_page_preview=True,
         )
 
-    elif query.data == "Hatsune_admin":
+    elif query.data == "hatsune_admin":
         query.message.edit_text(
             text=f"*๏ Let's make your group bit effective now*"
             "\nCongragulations, HatsuneMikuRobot now ready to manage your group."
@@ -441,11 +441,11 @@ def Hatsune_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_")]]
+                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_")]]
             ),
         )
 
-    elif query.data == "Hatsune_notes":
+    elif query.data == "hatsune_notes":
         query.message.edit_text(
             text=f"<b>๏ Setting up notes</b>"
             f"\nYou can save message/media/audio or anything as notes"
@@ -453,10 +453,10 @@ def Hatsune_about_callback(update, context):
             f"\n\nYou can also set buttons for notes and filters (refer help menu)",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_")]]
+                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_")]]
             ),
         )
-    elif query.data == "Hatsune_support":
+    elif query.data == "hatsune_support":
         query.message.edit_text(
             text="*๏ Hatsune Miku support chats*"
             "\nJoin My Logs Group/Federation for see or report a problem on ZenitsuID.",
@@ -464,30 +464,30 @@ def Hatsune_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ʟᴏɢs​", url="t.me/HatsuneMikuLogs"),
+                        InlineKeyboardButton(text="ʟᴏɢs​", url="t.me/HatsuneMikuProject"),
                         InlineKeyboardButton(
-                            text="ғᴇᴅᴇʀᴀᴛɪᴏɴ​", url="https://t.me/HatsuneMikuFed"
+                            text="ғᴇᴅᴇʀᴀᴛɪᴏɴ​", url="https://t.me/HatsuneMikuProject"
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_"),
+                        InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_"),
                     ],
                 ]
             ),
         )
 
-    elif query.data == "Hatsune_credit":
+    elif query.data == "hatsune_credit":
         query.message.edit_text(
             text=f"<b>๏ Credis for ZenitsuID</b>\n"
-            f"\nHere Developers Making The HatsuneMikuRobot",
+            f"\nHere Developers Making The Hatsune Miku",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ZenitsuID", url="t.me/ZenitsuID"),
+                        InlineKeyboardButton(text="ᴢᴇɴɪᴛsᴜɪᴅ", url="t.me/ZenitsuID"),
                     ],
                     [
-                        InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_"),
+                        InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_"),
                     ],
                 ]
             ),
@@ -512,7 +512,7 @@ def Source_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="Hatsune_")]]
+                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_")]]
             ),
         )
     elif query.data == "source_back":
