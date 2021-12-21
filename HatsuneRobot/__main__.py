@@ -401,7 +401,7 @@ def hatsune_about_callback(update, context):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴍᴜsɪᴄᴘʟᴀʏᴇʀ​", callback_data="source_"
+                            text="ʙᴏᴛ ʟɪsᴛ​", callback_data="source_"
                         ),
                     ],
                     [
@@ -498,21 +498,20 @@ def Source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text="๏›› This advance command for Musicplayer."
-            "\n\n๏ Command for admins only."
-            "\n • `/reload` - For refreshing the adminlist."
-            "\n • `/pause` - To pause the playback."
-            "\n • `/resume` - To resuming the playback You've paused."
-            "\n • `/skip` - To skipping the player."
-            "\n • `/end` - For end the playback."
-            "\n • `/musicplayer <on/off>` - Toggle for turn ON or turn OFF the musicplayer."
-            "\n\n๏ Command for all members."
-            "\n • `/play` <query /reply audio> - Playing music via YouTube."
-            "\n • `/playlist` - To playing a playlist of groups or your personal playlist",
+            text="๏›› This Bot List By Hatsune Miku Projects.",
             parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_")]]
+                [
+                    [
+                        InlineKeyboardButton(text="ᴍᴀɴᴀɢᴇʀ ɢʀᴏᴜᴘs​", url="https://github.com/ZenitsuID/HatsuneRobot")
+                        InlineKeyboardButton(
+                            text="ʟᴇᴇᴄʜ ʙᴏᴛ​", url="https://github.com/ZenitsuID/Hatsune-Leech-Bot"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ​", callback_data="hatsune_"),
+                    ],
+                ]
             ),
         )
     elif query.data == "source_back":
