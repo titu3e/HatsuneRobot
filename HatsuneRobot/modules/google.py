@@ -292,7 +292,7 @@ async def apk(e):
         await e.reply("Exception Occured:- " + str(err))
 
 
-__mod_name__ = "sᴇᴀʀᴄʜ"
+__mod_name__ = "Search◎"
 
 __help__ = """
 ❂ /google <query>*:* Perform a google search
@@ -305,5 +305,5 @@ __help__ = """
 ❂ /imdb <Movie name>*:* Get full info about a movie with imdb.com
 ❂ Hatsune Miku <query>*:* Hatsune Miku answers the query
 
-  💡Ex: `Hatsune Miku where is Japan?`
+  💡Ex: `Hatsune Miku where is Indonesia?`
 """

@@ -638,16 +638,16 @@ doin?
  Reply 2
  %%%
  Reply 3`
- 
 ❂ /stop <filter keyword>*:* Stop that filter.
 
 *Chat creator only:*
 ❂ /removeallfilters*:* Remove all chat filters at once.
+
 *Note*: Filters also support markdown formatters like: {first}, {last} etc.. and buttons.
 Check /markdownhelp to know more!
 """
 
-__mod_name__ = "ғɪʟᴛᴇʀs"
+__mod_name__ = "Filters"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
