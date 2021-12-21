@@ -28,7 +28,7 @@ from HatsuneRobot import telethn
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client["emiexrobot"]
+db = client["hatsunerobot"]
 gbanned = db.gban
 
 
