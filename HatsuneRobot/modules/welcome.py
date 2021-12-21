@@ -1263,8 +1263,10 @@ __help__ = """
 ❂ /cleanwelcome <on/off>*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
 ❂ /welcomemutehelp*:* gives information about welcome mutes.
 ❂ /cleanservice <on/off*:* deletes telegrams welcome/left service messages.
+
  *Example:*
 user joined chat, user left chat.
+
 *Welcome markdown:*
 ❂ /welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
 """
@@ -1329,7 +1331,7 @@ dispatcher.add_handler(BUTTON_VERIFY_HANDLER)
 dispatcher.add_handler(WELCOME_MUTE_HELP)
 dispatcher.add_handler(CAPTCHA_BUTTON_VERIFY_HANDLER)
 
-__mod_name__ = "Greetings"
+__mod_name__ = "ɢʀᴇᴇᴛɪɴɢs"
 __command_list__ = []
 __handlers__ = [
     NEW_MEM_HANDLER,

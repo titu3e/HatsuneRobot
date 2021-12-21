@@ -164,11 +164,9 @@ Chatbot utilizes the Kuki's api which allows Kuki to talk and provide a more int
 
 *Admins only Commands*:
 ❂ `/Chatbot`*:* Shows chatbot control panel
-  
-*Powered by ItelAi*
 """
 
-__mod_name__ = "ChatBot"
+__mod_name__ = "ᴄʜᴀᴛʙᴏᴛ"
 
 
 CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async=True)

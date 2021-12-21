@@ -27,6 +27,7 @@ eg:  /tl id//en: translates from Indonesian to English.
 I can convert text to voice and voice to text..
 ❂ /tts <lang code>*:* Reply to any message to get text to speech output
 ❂ /stt*:* Type in reply to a voice message(support english only) to extract text from it.
+
 *Language Codes*
 `af,am,ar,az,be,bg,bn,bs,ca,ceb,co,cs,cy,da,de,el,en,eo,es,
 et,eu,fa,fi,fr,fy,ga,gd,gl,gu,ha,haw,hi,hmn,hr,ht,hu,hy,
@@ -36,7 +37,7 @@ sm,sn,so,sq,sr,st,su,sv,sw,ta,te,tg,th,tl,tr,uk,ur,uz,
 vi,xh,yi,yo,zh,zh_CN,zh_TW,zu`
 """
 
-__mod_name__ = "Translator"
+__mod_name__ = "ᴛʀᴀɴsʟᴀᴛᴏʀ"
 
 
 trans = Translator()

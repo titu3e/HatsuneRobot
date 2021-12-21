@@ -550,11 +550,9 @@ def snipe(update: Update, context: CallbackContext):
 
 __help__ = """
 *User Commands:*
-
 ❂ /kickme*:* kicks the user who issued the command
 
 *Admins only:*
-
 ❂ /ban <userhandle>*:* bans a user. (via handle, or reply)
 ❂ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
 ❂ /tban <userhandle> x(m/h/d)*:* bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
@@ -569,7 +567,7 @@ __help__ = """
 """
 
 
-__mod_name__ = "Bans/Mutes"
+__mod_name__ = "ʙᴀɴs/ᴍᴜᴛᴇs"
 
 BAN_HANDLER = CommandHandler(["ban", "sban"], ban, run_async=True)
 TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=True)

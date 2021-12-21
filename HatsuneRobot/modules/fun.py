@@ -328,16 +328,15 @@ __help__ = """
 ❂ /pat*:* pats a user, or get patted
 ❂ /8ball*:* predicts using 8ball method
 
-- Animation
+*Animation*
 ❂ /love 
 ❂ /hack 
 ❂ /bombs 
 
-- Shippering
+*Shippering*
 ❂ /couples - get couples of today
 
-- Here is the help for the Styletext module:
-
+Here is the help for the Styletext module:
 ❂ /weebify <text>: weebify your text!
 ❂ /bubble <text>: bubble your text!
 ❂ /fbubble <text>: bubble-filled your text!
@@ -378,7 +377,7 @@ dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(EIGHTBALL_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
 
-__mod_name__ = "Fun"
+__mod_name__ = "ғᴜɴ"
 __command_list__ = [
     "runs",
     "slap",

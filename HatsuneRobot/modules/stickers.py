@@ -575,11 +575,10 @@ def delsticker(update, context):
         )
 
 
-__mod_name__ = "Stickers"
+__mod_name__ = "sᴛɪᴄᴋᴇʀs"
 
 __help__ = """
 *Help menu for stickers tools*
-
 ❂ /stickerid*:* reply to a sticker to me to tell you its file ID.
 ❂ /getsticker*:* reply to a sticker to me to upload its raw PNG file.
 ❂ /kang*:* reply to a sticker to add it to your pack.
