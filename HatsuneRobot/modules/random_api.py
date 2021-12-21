@@ -19,7 +19,7 @@ from HatsuneRobot.events import register
 from HatsuneRobot import telethn as tbot
 
 
-@register(pattern="^/ptl ?(.*)")
+@register(pattern="^/asupan ?(.*)")
 async def asupan(event):
     try:
         resp = requests.get("https://api-tede.herokuapp.com/api/asupan/ptl").json()
