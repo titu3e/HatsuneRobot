@@ -1,19 +1,4 @@
-"""Hatsune Robot main module"""
-# Copyright (C) 2021 - 2022  ZenitsuID, <https://github.com/ZenitsuID.git>
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+from math import ceil
 from typing import Dict, List
 
 from HatsuneRobot import NO_LOAD
@@ -55,40 +40,38 @@ def split_message(msg: str) -> List[str]:
 def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     if not chat:
         modules = sorted(
-            [
-                EqInlineKeyboardButton(
-                    x.__mod_name__,
-                    callback_data="{}_module({})".format(
-                        prefix, x.__mod_name__.lower()
-                    ),
-                )
-                for x in module_dict.values()
-            ]
-        )
+            [EqInlineKeyboardButton(x.__mod_name__,
+                                    callback_data="{}_module({})".format(prefix, x.__mod_name__.lower())) for x
+             in module_dict.values()])
     else:
         modules = sorted(
-            [
-                EqInlineKeyboardButton(
-                    x.__mod_name__,
-                    callback_data="{}_module({},{})".format(
-                        prefix, chat, x.__mod_name__.lower()
-                    ),
-                )
-                for x in module_dict.values()
-            ]
-        )
+            [EqInlineKeyboardButton(x.__mod_name__,
+                                    callback_data="{}_module({},{})".format(prefix, chat, x.__mod_name__.lower())) for x
+             in module_dict.values()])
 
-    pairs = [modules[i * 3 : (i + 1) * 3] for i in range((len(modules) + 3 - 1) // 3)]
+    pairs = [
+    modules[i * 3:(i + 1) * 3] for i in range((len(modules) + 3 - 1) // 3)
+    ]
 
     round_num = len(modules) / 3
     calc = len(modules) - round(round_num)
-    if calc in [1, 2]:
-        pairs.append((modules[-1],))
+    if calc == 1:
+        pairs.append((modules[-1], ))
     elif calc == 2:
-        pairs.append((modules[-1],))
+        pairs.append((modules[-1], ))
+
+    max_num_pages = ceil(len(pairs) / 10)
+    modulo_page = page_n % max_num_pages
+
+    # can only have a certain amount of buttons side by side
+    if len(pairs) > 8:
+        pairs = pairs[modulo_page * 8:8 * (modulo_page + 1)] + [
+            (EqInlineKeyboardButton("⬅️", callback_data="{}_prev({})".format(prefix, modulo_page)),
+                EqInlineKeyboardButton("Back", callback_data="hatsune_back"),
+             EqInlineKeyboardButton("➡️", callback_data="{}_next({})".format(prefix, modulo_page)))]
 
     else:
-        pairs += [[EqInlineKeyboardButton("ɢᴏ ʜᴏᴍᴇ", callback_data="hatsune_back")]]
+        pairs += [[EqInlineKeyboardButton("Back", callback_data="hatsune_back")]]
 
     return pairs
 
