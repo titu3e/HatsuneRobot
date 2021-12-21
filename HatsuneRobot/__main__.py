@@ -100,7 +100,7 @@ PM_START_TEXT = """
 *Hello {} !*
 ────────────────────────
 ✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
-✪ Maintained by @skyzu ✨
+✪ Maintained by @ZenitsuID ✨
 ────────────────────────
 """
 
