@@ -99,15 +99,14 @@ async def detect_nsfw(_, message):
         f"""
 **NSFW Image Detected & Deleted Successfully!
 ————————————————————**
-**User:** {message.from_user.mention} [`{message.from_user.id}`]
-**Safe:** `{results.neutral} %`
-**Porn:** `{results.porn} %`
-**Adult:** `{results.sexy} %`
-**Hentai:** `{results.hentai} %`
-**Drawings:** `{results.drawings} %`
+✪**User:** {message.from_user.mention} [`{message.from_user.id}`]
+✪**Safe:** `{results.neutral} %`
+✪**Porn:** `{results.porn} %`
+✪**Adult:** `{results.sexy} %`
+✪**Hentai:** `{results.hentai} %`
+✪**Drawings:** `{results.drawings} %`
 **————————————————————**
-**Powered By:** @HatsuneMikuProject**
-**Owner:** @ZenitsuID
+**Maintained By:** @ZenitsuID
 """
     )
 
