@@ -1,10 +1,27 @@
+"""Hatsune Robot main module"""
+# Copyright (C) 2021 - 2022  ZenitsuID, <https://github.com/ZenitsuID.git>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import random
 import threading
 from typing import Union
 
 from HatsuneRobot.modules.helper_funcs.msg_types import Types
 from HatsuneRobot.modules.sql import BASE, SESSION
-from sqlalchemy import BigInteger, Boolean, Column, Integer, String, UnicodeText
+from sqlalchemy import Boolean, Column, Integer, String, UnicodeText
+from sqlalchemy.sql.sqltypes import BigInteger
 
 DEFAULT_WELCOME = "Hey {first}, how are you?"
 DEFAULT_GOODBYE = "Nice knowing ya!"
@@ -35,7 +52,7 @@ DEFAULT_WELCOME_MESSAGES = [
     "{first} just showed up. Hold my beer.",
     "Challenger approaching! {first} has appeared!",
     "It's a bird! It's a plane! Nevermind, it's just {first}.",
-    "It's {first}! Praise the sun! \o/",
+    r"It's {first}! Praise the sun! \o/",
     "Never gonna give {first} up. Never gonna let {first} down.",
     "Ha! {first} has joined! You activated my trap card!",
     "Hey! Listen! {first} has joined!",
@@ -150,11 +167,11 @@ DEFAULT_WELCOME_MESSAGES = [
     "In the jungle, you must wait...until the dice read five or eight.",  # Jumanji stuff
     "Dr.{first} Famed archeologist and international explorer,\nWelcome to Jumanji!\nJumanji's Fate is up to you now.",
     "{first}, this will not be an easy mission - monkeys slow the expedition.",  # End of Jumanji stuff
-    "Remember, remember, the Fifth of November, the Gunpowder Treason and Plot. I know of no reason why the Gunpowder Treason should ever be forgot.", #V for Vendetta
-    "The only verdict is vengeance; a vendetta, held as a votive not in vain, for the value and veracity of such shall one day vindicate the vigilant and the virtuous.", #V for Vendetta
-    "Behind {first} there is more than just flesh. Beneath this user there is an idea... and ideas are bulletproof.", #V for Vendetta
-    "Love your rage, not your cage.", #V for Vendetta
-    "Get your stinking paws off me, you damned dirty ape!", #Planet of the apes
+    "Remember, remember, the Fifth of November, the Gunpowder Treason and Plot. I know of no reason why the Gunpowder Treason should ever be forgot.",  # V for Vendetta
+    "The only verdict is vengeance; a vendetta, held as a votive not in vain, for the value and veracity of such shall one day vindicate the vigilant and the virtuous.",  # V for Vendetta
+    "Behind {first} there is more than just flesh. Beneath this user there is an idea... and ideas are bulletproof.",  # V for Vendetta
+    "Love your rage, not your cage.",  # V for Vendetta
+    "Get your stinking paws off me, you damned dirty ape!",  # Planet of the apes
     "Elementary, my dear {first}.",
     "I'm back - {first}.",
     "Bond. {first} Bond.",
@@ -233,7 +250,8 @@ class Welcome(BASE):
     custom_content = Column(UnicodeText, default=None)
 
     custom_welcome = Column(
-        UnicodeText, default=random.choice(DEFAULT_WELCOME_MESSAGES)
+        UnicodeText,
+        default=random.choice(DEFAULT_WELCOME_MESSAGES),
     )
     welcome_type = Column(Integer, default=Types.TEXT.value)
 
@@ -249,7 +267,8 @@ class Welcome(BASE):
 
     def __repr__(self):
         return "<Chat {} should Welcome new users: {}>".format(
-            self.chat_id, self.should_welcome
+            self.chat_id,
+            self.should_welcome,
         )
 
 
@@ -295,7 +314,7 @@ class WelcomeMute(BASE):
 
 class WelcomeMuteUsers(BASE):
     __tablename__ = "human_checks"
-    user_id = Column(Integer, primary_key=True)
+    user_id = Column(BigInteger, primary_key=True)
     chat_id = Column(String(14), primary_key=True)
     human_check = Column(Boolean)
 
@@ -397,10 +416,8 @@ def get_welc_pref(chat_id):
             welc.custom_content,
             welc.welcome_type,
         )
-
-    else:
-        # Welcome by default.
-        return True, DEFAULT_WELCOME, None, Types.TEXT
+    # Welcome by default.
+    return True, random.choice(DEFAULT_WELCOME_MESSAGES), None, Types.TEXT
 
 
 def get_gdbye_pref(chat_id):
@@ -408,9 +425,8 @@ def get_gdbye_pref(chat_id):
     SESSION.close()
     if welc:
         return welc.should_goodbye, welc.custom_leave, welc.leave_type
-    else:
-        # Welcome by default.
-        return True, DEFAULT_GOODBYE, Types.TEXT
+    # Welcome by default.
+    return True, random.choice(DEFAULT_GOODBYE_MESSAGES), Types.TEXT
 
 
 def set_clean_welcome(chat_id, clean_welcome):
@@ -460,7 +476,11 @@ def set_gdbye_preference(chat_id, should_goodbye):
 
 
 def set_custom_welcome(
-    chat_id, custom_content, custom_welcome, welcome_type, buttons=None
+    chat_id,
+    custom_content,
+    custom_welcome,
+    welcome_type,
+    buttons=None,
 ):
     if buttons is None:
         buttons = []
@@ -476,7 +496,7 @@ def set_custom_welcome(
             welcome_settings.welcome_type = welcome_type.value
 
         else:
-            welcome_settings.custom_welcome = DEFAULT_WELCOME
+            welcome_settings.custom_welcome = random.choice(DEFAULT_WELCOME_MESSAGES)
             welcome_settings.welcome_type = Types.TEXT.value
 
         SESSION.add(welcome_settings)
@@ -499,7 +519,7 @@ def set_custom_welcome(
 
 def get_custom_welcome(chat_id):
     welcome_settings = SESSION.query(Welcome).get(str(chat_id))
-    ret = DEFAULT_WELCOME
+    ret = random.choice(DEFAULT_WELCOME_MESSAGES)
     if welcome_settings and welcome_settings.custom_welcome:
         ret = welcome_settings.custom_welcome
 
@@ -521,7 +541,7 @@ def set_custom_gdbye(chat_id, custom_goodbye, goodbye_type, buttons=None):
             welcome_settings.leave_type = goodbye_type.value
 
         else:
-            welcome_settings.custom_leave = DEFAULT_GOODBYE
+            welcome_settings.custom_leave = random.choice(DEFAULT_GOODBYE_MESSAGES)
             welcome_settings.leave_type = Types.TEXT.value
 
         SESSION.add(welcome_settings)
@@ -544,7 +564,7 @@ def set_custom_gdbye(chat_id, custom_goodbye, goodbye_type, buttons=None):
 
 def get_custom_gdbye(chat_id):
     welcome_settings = SESSION.query(Welcome).get(str(chat_id))
-    ret = DEFAULT_GOODBYE
+    ret = random.choice(DEFAULT_GOODBYE_MESSAGES)
     if welcome_settings and welcome_settings.custom_leave:
         ret = welcome_settings.custom_leave
 
