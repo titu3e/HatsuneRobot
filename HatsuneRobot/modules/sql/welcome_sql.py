@@ -23,8 +23,12 @@ from HatsuneRobot.modules.sql import BASE, SESSION
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText
 from sqlalchemy.sql.sqltypes import BigInteger
 
-DEFAULT_WELCOME_MESSAGES = "Hey {first}, how are you?"
-DEFAULT_GOODBYE_MESSAGES = "Nice knowing ya!"
+DEFAULT_WELCOME_MESSAGES = [
+    "Hey {first}, how are you?",
+]
+DEFAULT_GOODBYE_MESSAGES = [
+    "Nice knowing ya!",
+]
 
 class Welcome(BASE):
     __tablename__ = "welcome_pref"
