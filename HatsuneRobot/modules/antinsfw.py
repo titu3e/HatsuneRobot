@@ -106,7 +106,8 @@ async def detect_nsfw(_, message):
 **Hentai:** `{results.hentai} %`
 **Drawings:** `{results.drawings} %`
 **————————————————————**
-**Dasar Cucu Kakek Sugiono**
+**Powered By:** @HatsuneMikuProject**
+**Owner:** @ZenitsuID
 """
     )
 
