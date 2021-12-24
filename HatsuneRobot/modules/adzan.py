@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from HatsuneRobot import CMD_HELP
+
 
 from HatsuneRobot.events import register
 
