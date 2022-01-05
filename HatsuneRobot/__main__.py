@@ -84,7 +84,11 @@ PM_START_TEXT = """
 *Hello {} !*
 ────────────────────────
 ✪ I'm an anime theme bot designed to help manage your telegram group with a lot features.
-✪ Maintained by @ZenitsuID ✨
+────────────────────────
+× *Uptime:* `{}`
+× `{}` *users, across* `{}` *chats.*
+────────────────────────
+✪ Maintained by @Sungjinwooarc ✨
 ────────────────────────
 """
 
@@ -98,13 +102,13 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ​", url="https://github.com/ZenitsuID/HatsuneRobot"
+            text="DEV​", url="t.me/sungjinwooarc
         ),
         InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ​", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
         InlineKeyboardButton(
-            text="➗ ᴀᴅᴅ ʜᴀᴛsᴜɴᴇ ᴍɪᴋᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/HatsuneMikuRobot?startgroup=new"
+            text="➗ ᴀᴅᴅ ʜᴀᴛsᴜɴᴇ ᴍɪᴋᴜ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ​ ➗", url="t.me/@arthur_leywin_RoBot?startgroup=new"
         ),
     ],
 ]
